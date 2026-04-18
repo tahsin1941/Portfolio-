@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Md Tahsin Montasir — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --black2: #111111;
+    --dark: #1c1c1c;
+    --mid: #3a3a3a;
+    --muted: #6b6b6b;
+    --light: #c0c0c0;
+    --silver: #e4e4e4;
+    --offwhite: #f5f5f5;
+    --white: #ffffff;
+    --radius: 10px;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--black);
+    background: var(--white);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--black);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem; height: 58px;
+    border-bottom: 1px solid #222;
+  }
+
+  nav .logo {
+    font-family: var(--font-display);
+    color: var(--white);
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+  }
+
+  nav ul { list-style: none; display: flex; gap: 2rem; }
+  nav ul a {
+    text-decoration: none;
+    color: var(--light);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--white); }
+
+  section { padding: 6rem 0; }
+  .container { max-width: 960px; margin: 0 auto; padding: 0 2rem; }
+
+  /* HERO */
+  #hero {
+    background: var(--black);
+    min-height: 100vh;
+    display: flex; align-items: center;
+    position: relative; overflow: hidden; padding: 0;
+  }
+
+  #hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,0.015) 0px,
+      rgba(255,255,255,0.015) 1px,
+      transparent 1px,
+      transparent 80px
+    );
+  }
+
+  #hero::after {
+    content: '';
+    position: absolute;
+    top: -150px; right: -150px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .hero-inner {
+    max-width: 960px; margin: 0 auto; padding: 0 2rem;
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: transparent;
+    color: var(--silver);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 40px;
+    border: 1px solid rgba(255,255,255,0.2);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    color: var(--white);
+    line-height: 1.12;
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-name span {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,0.55);
+  }
+
+  .hero-title {
+    font-size: 0.88rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .hero-bio {
+    color: rgba(255,255,255,0.55);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-block;
+    padding: 11px 26px;
+    border-radius: 3px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    cursor: pointer; border: none;
+  }
+
+  .btn-primary { background: var(--white); color: var(--black); }
+  .btn-primary:hover { background: var(--silver); }
+
+  .btn-outline {
+    background: transparent;
+    color: rgba(255,255,255,0.65);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .btn-outline:hover { border-color: var(--white); color: var(--white); }
+
+  .hero-stats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: var(--radius); overflow: hidden;
+  }
+
+  .stat-card {
+    background: var(--black2);
+    padding: 1.25rem 1.5rem;
+    transition: background 0.2s;
+  }
+  .stat-card:hover { background: #161616; }
+
+  .stat-card .num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 0.35rem;
+  }
+
+  .stat-card .label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  .available-pill {
+    grid-column: 1 / -1;
+    background: #111;
+    padding: 1rem 1.25rem;
+    display: flex; align-items: center; gap: 0.75rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .dot-white {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--white);
+    flex-shrink: 0;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .available-pill p { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.4; }
+  .available-pill strong { color: var(--white); font-weight: 500; }
+
+  .section-label {
+    font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.5rem;
+  }
+
+  h2.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 3vw, 2.2rem);
+    color: var(--black);
+    margin-bottom: 0.75rem; line-height: 1.2;
+  }
+
+  .section-divider {
+    width: 40px; height: 2px;
+    background: var(--black);
+    margin-bottom: 3rem;
+  }
+
+  /* ABOUT */
+  #about { background: var(--white); }
+
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+
+  .about-text p { color: var(--mid); font-size: 0.96rem; margin-bottom: 1rem; line-height: 1.85; }
+
+  .skills-block h3 { font-family: var(--font-display); font-size: 1.05rem; color: var(--black); margin-bottom: 1.25rem; }
+
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+  .skill-tag {
+    background: var(--offwhite);
+    border: 1px solid var(--silver);
+    color: var(--mid);
+    font-size: 0.8rem;
+    padding: 5px 13px;
+    border-radius: 2px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  /* EXPERIENCE */
+  #experience { background: var(--offwhite); }
+
+  .timeline { position: relative; }
+
+  .timeline::before {
+    content: ''; position: absolute;
+    left: 0; top: 8px; bottom: 0;
+    width: 1px; background: var(--silver);
+  }
+
+  .timeline-item { padding-left: 2.5rem; margin-bottom: 3rem; position: relative; }
+
+  .timeline-item::before {
+    content: ''; position: absolute;
+    left: -4px; top: 7px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--black);
+  }
+
+  .timeline-meta { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
+
+  .timeline-date { font-size: 0.75rem; color: var(--muted); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .timeline-company {
+    font-size: 0.8rem; color: var(--mid);
+    background: var(--white); padding: 3px 12px;
+    border: 1px solid var(--silver); border-radius: 2px;
+  }
+
+  .timeline-item h3 { font-family: var(--font-display); font-size: 1.2rem; color: var(--black); margin-bottom: 0.75rem; }
+
+  .timeline-item ul { list-style: none; padding: 0; }
+
+  .timeline-item ul li {
+    font-size: 0.91rem; color: var(--mid);
+    padding: 4px 0 4px 1.2rem; position: relative; line-height: 1.65;
+  }
+
+  .timeline-item ul li::before {
+    content: ''; position: absolute;
+    left: 0; top: 13px;
+    width: 4px; height: 1px;
+    background: var(--muted);
+  }
+
+  /* EDUCATION */
+  #education { background: var(--white); }
+
+  .edu-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px; background: var(--silver); border: 1px solid var(--silver);
+  }
+
+  .edu-card {
+    background: var(--white);
+    padding: 1.75rem 1.5rem;
+    transition: background 0.15s;
+  }
+  .edu-card:hover { background: var(--offwhite); }
+
+  .edu-card .year { font-size: 0.72rem; color: var(--muted); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+
+  .edu-card h3 { font-family: var(--font-display); font-size: 1.05rem; color: var(--black); margin-bottom: 0.3rem; line-height: 1.25; }
+
+  .edu-card .institute { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.75rem; line-height: 1.4; }
+
+  .edu-card .grade {
+    display: inline-block;
+    background: var(--black);
+    color: var(--white);
+    font-size: 0.75rem; font-weight: 500;
+    padding: 4px 12px;
+    letter-spacing: 0.04em;
+  }
+
+  /* CERTIFICATES */
+  #certificates { background: var(--black); }
+  #certificates .section-label { color: var(--muted); }
+  #certificates h2.section-title { color: var(--white); }
+  #certificates .section-divider { background: var(--white); }
+
+  .cert-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .cert-card {
+    background: var(--black2);
+    padding: 1.75rem 1.5rem;
+    transition: background 0.15s;
+  }
+  .cert-card:hover { background: #161616; }
+
+  .cert-icon { font-size: 20px; margin-bottom: 1rem; color: var(--white); }
+
+  .cert-card h3 { font-size: 0.97rem; font-weight: 500; color: var(--white); margin-bottom: 0.3rem; }
+
+  .cert-card .issuer { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.75rem; }
+
+  .overall-score {
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 10px; text-align: center; margin-bottom: 0.75rem;
+  }
+  .overall-score .big { font-size: 1.6rem; font-weight: 700; color: var(--white); line-height: 1; }
+  .overall-score .sub { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+
+  .pte-scores {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: rgba(255,255,255,0.06); margin-top: 0.75rem;
+  }
+
+  .score-item { background: var(--black2); padding: 8px; text-align: center; }
+  .score-item .s-val { font-size: 1rem; font-weight: 500; color: var(--white); line-height: 1; }
+  .score-item .s-label { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* CONTACT */
+  #contact { background: var(--offwhite); }
+
+  .contact-box {
+    border: 1px solid var(--silver);
+    background: var(--white);
+    padding: 3rem;
+    text-align: center;
+    max-width: 580px; margin: 0 auto;
+  }
+
+  .contact-box p { color: var(--mid); margin-bottom: 2rem; font-size: 0.96rem; }
+
+  .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+
+  .contact-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    text-decoration: none; color: var(--black);
+    font-size: 0.88rem; font-weight: 500;
+    padding: 10px 20px;
+    border: 1px solid var(--silver);
+    background: var(--offwhite);
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .contact-link:hover { background: var(--black); color: var(--white); border-color: var(--black); }
+
+  .open-to { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+
+  .open-badge {
+    background: transparent;
+    border: 1px solid var(--silver);
+    color: var(--mid);
+    font-size: 0.8rem; font-weight: 400;
+    padding: 6px 16px;
+    letter-spacing: 0.03em;
+  }
+
+  footer {
+    background: var(--black);
+    text-align: center; padding: 2rem;
+    color: rgba(255,255,255,0.25);
+    font-size: 0.8rem;
+  }
+  footer span { color: rgba(255,255,255,0.6); }
+
+  @media (max-width: 700px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    nav ul { display: none; }
+    .cert-grid { grid-template-columns: 1fr; }
+    .cert-card[style*="span 2"] { grid-column: span 1; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">MTM</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#certificates">Certificates</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">Open to Work</div>
+      <h1 class="hero-name">Md Tahsin<br><span>Montasir</span></h1>
+      <p class="hero-title">BBA Graduate · HRM & Marketing · Masters of Teaching, Australia</p>
+      <p class="hero-bio">Motivated business professional with hands-on experience in banking, audit, and client relationship management. Currently based in Australia, bringing a global perspective to every role.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">Get in Touch</a>
+        <a href="#experience" class="btn btn-outline">View Experience</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="num">3.59</div>
+        <div class="label">CGPA<br>(out of 4.00)</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">70</div>
+        <div class="label">PTE Overall<br>Score</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">86</div>
+        <div class="label">PTE Speaking<br>Score</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">2+</div>
+        <div class="label">Years Work<br>Experience</div>
+      </div>
+      <div class="available-pill">
+        <div class="dot-white"></div>
+        <p><strong>Open to work</strong> — Childcare (Australia) &amp; HR (Bangladesh)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">Who I Am</div>
+    <h2 class="section-title">About Me</h2>
+    <div class="section-divider"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I am a Bachelor of Business Administration graduate specialising in Human Resource Management and Marketing from American International University-Bangladesh, now pursuing a Masters of Teaching at Ikon Institute of Australia.</p>
+        <p>My career spans general banking at Premier Bank PLC, where I assisted with 50+ account openings with 100% accuracy, and over a year at MABS &amp; J Partners audit firm working in the Cash Incentive Department.</p>
+        <p>I thrive at the intersection of people, process, and communication — whether managing client relationships, ensuring data integrity in audits, or collaborating in fast-paced team environments.</p>
+      </div>
+      <div class="skills-block">
+        <h3>Skills &amp; Tools</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Microsoft Office Suite</span>
+          <span class="skill-tag">Excel</span>
+          <span class="skill-tag">Human Resource Management</span>
+          <span class="skill-tag">Marketing</span>
+          <span class="skill-tag">Client Relationship</span>
+          <span class="skill-tag">File Auditing</span>
+          <span class="skill-tag">General Banking</span>
+          <span class="skill-tag">Team Collaboration</span>
+          <span class="skill-tag">Administrative Duties</span>
+          <span class="skill-tag">Compliance</span>
+          <span class="skill-tag">Data Integrity</span>
+          <span class="skill-tag">Professional Communication</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label">Career</div>
+    <h2 class="section-title">Work Experience</h2>
+    <div class="section-divider"></div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-meta">
+          <span class="timeline-date">Oct 2023 – Dec 2023</span>
+          <span class="timeline-company">The Premier Bank PLC</span>
+        </div>
+        <h3>Internship — General Banking</h3>
+        <ul>
+          <li>Assisted with over 50 account opening procedures, ensuring full compliance with bank policies.</li>
+          <li>Processed honour cheques efficiently, maintaining 100% accuracy throughout the placement.</li>
+          <li>Collaborated with the banking team on administrative duties, contributing to daily operational goals.</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-meta">
+          <span class="timeline-date">Dec 2021 – Dec 2022</span>
+          <span class="timeline-company">MABS &amp; J Partners</span>
+        </div>
+        <h3>Junior Associate — Cash Incentive Department</h3>
+        <ul>
+          <li>Audited and reviewed files in the cash incentive department, ensuring data integrity at all stages.</li>
+          <li>Entered client data into Excel sheets, improving workflow efficiency by an estimated 20%.</li>
+          <li>Interacted with clients from banks and RMG companies, strengthening professional communication skills.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <div class="section-label">Academic Background</div>
+    <h2 class="section-title">Education</h2>
+    <div class="section-divider"></div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="year">2024 – Present</div>
+        <h3>Masters of Teaching</h3>
+        <div class="institute">Ikon Institute of Australia</div>
+        <span class="grade">Currently Enrolled</span>
+      </div>
+      <div class="edu-card">
+        <div class="year">Sep 2019 – Feb 2024</div>
+        <h3>Bachelor of Business Administration</h3>
+        <div class="institute">American International University-Bangladesh · HRM &amp; Marketing</div>
+        <span class="grade">CGPA 3.59 / 4.00</span>
+        <p style="font-size:0.8rem; color:#6b6b6b; margin-top:0.75rem; line-height:1.5;">Case-based Pedagogy Workshop · Entrepreneurship Development · Business Plan Exhibition — 2nd Runner-Up</p>
+      </div>
+      <div class="edu-card">
+        <div class="year">2017 – 2019</div>
+        <h3>Higher Secondary Certificate</h3>
+        <div class="institute">Dhaka City College · Science</div>
+        <span class="grade">GPA 4.75 / 5.00</span>
+      </div>
+      <div class="edu-card">
+        <div class="year">2015 – 2017</div>
+        <h3>Secondary School Certificate</h3>
+        <div class="institute">National Ideal School &amp; College · Science</div>
+        <span class="grade">GPA 5.00 / 5.00</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATES -->
+<section id="certificates">
+  <div class="container">
+    <div class="section-label">Credentials</div>
+    <h2 class="section-title">Certificates &amp; Achievements</h2>
+    <div class="section-divider"></div>
+    <div class="cert-grid">
+      <div class="cert-card" style="grid-column: span 2;">
+        <div class="cert-icon">◈</div>
+        <h3>Pearson Test of English (PTE)</h3>
+        <div class="issuer">Pearson Education · Aug – Sep 2023</div>
+        <div class="overall-score">
+          <div class="big">70</div>
+          <div class="sub">Overall Score</div>
+        </div>
+        <div class="pte-scores">
+          <div class="score-item"><div class="s-val">86</div><div class="s-label">Speaking</div></div>
+          <div class="score-item"><div class="s-val">73</div><div class="s-label">Listening</div></div>
+          <div class="score-item"><div class="s-val">68</div><div class="s-label">Writing</div></div>
+          <div class="score-item"><div class="s-val">66</div><div class="s-label">Reading</div></div>
+        </div>
+        <p style="font-size:0.8rem; color:#6b6b6b; margin-top:0.75rem;">Met English language requirements for international postgraduate programs.</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">◆</div>
+        <h3>Business Plan Exhibition — 2nd Runner-Up</h3>
+        <div class="issuer">AIUB · Summer 2022–2023</div>
+        <p style="font-size:0.85rem; color:#6b6b6b; line-height:1.65; margin-top:0.5rem;">Led a team to develop an innovative business model in the Entrepreneurship Development course, earning 2nd runner-up and faculty recognition in a competitive university exhibition.</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">◇</div>
+        <h3>Case-based Pedagogy Workshop</h3>
+        <div class="issuer">American International University-Bangladesh</div>
+        <p style="font-size:0.85rem; color:#6b6b6b; line-height:1.65; margin-top:0.5rem;">Completed workshop titled "Business Teaching Cases: What, Why, and How to Deal with Those?" — building critical analytical and case-study skills applicable to teaching and business strategy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label">Let's Connect</div>
+    <h2 class="section-title">Get in Touch</h2>
+    <div class="section-divider"></div>
+    <div class="contact-box">
+      <p>I am open to opportunities in Australia and Bangladesh. Whether you're hiring for childcare, human resources, or other roles — I'd love to connect.</p>
+      <div class="contact-links">
+        <a href="mailto:tahsin.080700@gmail.com" class="contact-link">✉ tahsin.080700@gmail.com</a>
+      </div>
+      <div class="open-to">
+        <span class="open-badge">Childcare — Australia</span>
+        <span class="open-badge">Human Resources — Bangladesh</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Designed for <span>Md Tahsin Montasir</span> · 2025</p>
+</footer>
+
+</body>
+</html>
